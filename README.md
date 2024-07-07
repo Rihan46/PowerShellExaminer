@@ -39,7 +39,7 @@ pip install rich
 Here’s an example of how you might run the `PowerShellExaminer` tool:
 
 ```bash
-python powershellexaminer.py path/to/script.ps1
+python powershell.py path/to/script.ps1
 ```
 
 ### Known Limitations
