@@ -41,6 +41,7 @@ Here’s an example of how you might run the `PowerShellExaminer` tool:
 ```bash
 python powershell.py path/to/script.ps1
 ```
+![image](https://github.com/Rihan46/PowerShellExaminer/assets/174265890/e3f7a902-84be-45ad-9c5f-c2b1173681fe)
 
 ### Known Limitations
 
