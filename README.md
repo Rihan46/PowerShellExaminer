@@ -52,4 +52,4 @@ Here are some of the known limitations of the `PowerShellExaminer` tool:
 
 - **Pattern List:** The list of patterns used for detection is not exhaustive. We encourage users to contribute by adding new patterns to the `powershell_code_patterns` file to improve the tool’s effectiveness.
 
-Will Fix this limitation in the Next Release.
+Will address this limitation in the Next Release.
