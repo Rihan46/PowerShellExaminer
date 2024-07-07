@@ -1,0 +1,35 @@
+i''ex "pwd"
+i''e''x "pwd"
+i''e''x'' "pwd"
+ie''x'' "pwd"
+iex'' "pwd"
+i""e''x"" "pwd"
+ie""x'' "pwd"
+
+# and so on... but also:
+
+i''ex "p''wd"
+i''e''x "p''w''d"
+i''e''x'' "p''w''d''"
+ie''x'' "pw''d`"`""
+iex'' "p`"`"w`"`"d`"`""
+i""e''x"" "p`"`"w`"`"d''"
+ie""x'' "p`"`"w''d`"`""
+
+# You get the point.
+[*] Scanning file: ./test3.ps1
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted patterns about Networking in ./test3.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│                        IEX                         │
+└────────────────────────────────────────────────────┘
+[!] No URLs found in ./test3.ps1.
+
+[!] No Domains found in ./test3.ps1.
+
+[!] No File Paths found in ./test3.ps1.
+
+[!] No IP Addresses found in ./test3.ps1.
+
+[!] No Files found in ./test3.ps1.
+

