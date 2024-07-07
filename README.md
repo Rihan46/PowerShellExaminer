@@ -28,7 +28,7 @@ The `PowerShellExaminer` utilizes a set of predefined patterns and advanced text
 
 ### Installation
 
-To use `PowerShellExaminer`, you need to have Python 3.x installed along with the 'rich' library. You can install the necessary dependencies using pip:
+To use `PowerShellExaminer`, you need to have Python 3.x installed along with the `rich` library. You can install the necessary dependencies using pip:
 
 ```bash
 pip install rich
@@ -51,3 +51,5 @@ Here are some of the known limitations of the `PowerShellExaminer` tool:
 - **False Positives in Domain Extraction:** There might be occasional false positives during the domain extraction process.
 
 - **Pattern List:** The list of patterns used for detection is not exhaustive. We encourage users to contribute by adding new patterns to the `powershell_code_patterns` file to improve the tool’s effectiveness.
+
+Will Fix this limitation in the Next Release.
