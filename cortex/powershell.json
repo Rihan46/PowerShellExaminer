@@ -1,0 +1,19 @@
+{
+    "version": "1.1",
+    "author": "Rihaan",
+    "url": "https://github.com/Rihan46/PowerShellExaminer/tree/main",
+    "license": "AGPL-V3",
+    "description": "Examines PowerShell scripts for malicious patterns",
+    "data_types_supported": ["file"],
+    "parameters": [
+        {
+            "name": "file",
+            "type": "file",
+            "required": true,
+            "description": "The PowerShell script file to analyze"
+        }
+    ],
+    "command": "/opt/Cortex-Analyzers/analyzers/PowershellExaminer/powershellExaminer.py",
+    "base_configuration": "PowershellExaminer",
+    "parameter_name": "file"
+}
