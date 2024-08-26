@@ -50,15 +50,15 @@ class PowerShellExaminerAnalyzer(Analyzer):
         self.extract_files()
 
     def scan_patterns(self):
-    pattern_results = {}
-    for pat in powershell_code_patterns:
-        matched_values = []
-        for code in powershell_code_patterns[pat]["patterns"]:
-            matches = re.findall(code, str(self.all_strings), re.IGNORECASE)
-            matched_values.extend(matches)
-        if matched_values:
-            pattern_results[pat] = matched_values
-            self.results['patterns'] = pattern_results
+        pattern_results = {}
+        for pat in powershell_code_patterns:
+            matched_values = []
+            for code in powershell_code_patterns[pat]["patterns"]:
+                matches = re.findall(code, str(self.all_strings), re.IGNORECASE)
+                matched_values.extend(matches)
+            if matched_values:
+                pattern_results[pat] = matched_values
+        self.results['patterns'] = pattern_results
 
     def extract_urls(self):
         url_pattern = r'(https?://[^\s/$.?#].[^\s]*)'
